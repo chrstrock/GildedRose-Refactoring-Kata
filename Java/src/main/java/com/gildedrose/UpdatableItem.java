@@ -9,18 +9,25 @@ public class UpdatableItem extends Item{
     static void updateItemQuality(Item item) {
         boolean isAgedBrie = item.name.equals("Aged Brie");
         boolean isBackStagePass = item.name.equals("Backstage passes to a TAFKAL80ETC concert");
-        if (!isAgedBrie
-            && !isBackStagePass) {
-            if (item.quality > 0) {
-                if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                    item.quality = item.quality - 1;
-                }
-            }
-        } else {
+        if (isAgedBrie) {
             if (item.quality < 50) {
                 item.quality = item.quality + 1;
 
-                if (isBackStagePass) {
+            }
+
+            item.sellIn = item.sellIn - 1;
+
+            if (item.sellIn < 0) {
+                if (item.quality < 50) {
+                    item.quality = item.quality + 1;
+                }
+            }
+        }
+        else{
+            if (isBackStagePass) {
+                if (item.quality < 50) {
+                    item.quality = item.quality + 1;
+
                     if (item.sellIn < 11) {
                         if (item.quality < 50) {
                             item.quality = item.quality + 1;
@@ -33,29 +40,39 @@ public class UpdatableItem extends Item{
                         }
                     }
                 }
+
+                item.sellIn = item.sellIn - 1;
+
+                if (item.sellIn < 0) {
+                    item.quality = 0;
+                }
             }
-        }
-
-        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-            item.sellIn = item.sellIn - 1;
-        }
-
-        if (item.sellIn < 0) {
-            if (!isAgedBrie) {
-                if (!isBackStagePass) {
+            else{
+                boolean isSulfuras = item.name.equals("Sulfuras, Hand of Ragnaros");
+                if (isSulfuras) {
                     if (item.quality > 0) {
-                        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+                    }
+
+                    if (item.sellIn < 0) {
+                        if (item.quality > 0) {
+                        }
+                    }
+                }
+                else{
+                    if (item.quality > 0) {
+                        item.quality = item.quality - 1;
+                    }
+
+                    item.sellIn = item.sellIn - 1;
+
+                    if (item.sellIn < 0) {
+                        if (item.quality > 0) {
                             item.quality = item.quality - 1;
                         }
                     }
-                } else {
-                    item.quality = 0;
-                }
-            } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
                 }
             }
         }
     }
+
 }
