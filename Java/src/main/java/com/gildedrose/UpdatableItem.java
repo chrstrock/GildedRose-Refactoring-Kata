@@ -11,15 +11,15 @@ public class UpdatableItem extends Item{
         boolean isBackStagePass = item.name.equals("Backstage passes to a TAFKAL80ETC concert");
         if (isAgedBrie) {
             if (item.quality < 50) {
-                item.quality = item.quality + 1;
+                item.quality++;
 
             }
 
-            item.sellIn = item.sellIn - 1;
+            item.sellIn--;
 
             if (item.sellIn < 0) {
                 if (item.quality < 50) {
-                    item.quality = item.quality + 1;
+                    item.quality++;
                 }
             }
         }
@@ -48,17 +48,6 @@ public class UpdatableItem extends Item{
                 }
             }
             else{
-                boolean isSulfuras = item.name.equals("Sulfuras, Hand of Ragnaros");
-                if (isSulfuras) {
-                    if (item.quality > 0) {
-                    }
-
-                    if (item.sellIn < 0) {
-                        if (item.quality > 0) {
-                        }
-                    }
-                }
-                else{
                     if (item.quality > 0) {
                         item.quality = item.quality - 1;
                     }
@@ -70,7 +59,7 @@ public class UpdatableItem extends Item{
                             item.quality = item.quality - 1;
                         }
                     }
-                }
+
             }
         }
     }
