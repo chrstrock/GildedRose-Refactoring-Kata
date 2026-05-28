@@ -11,7 +11,7 @@ public class Item {
     public Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
-        this.quality = quality;
+        this.quality = Math.min(quality, 50);
     }
 
    @Override
